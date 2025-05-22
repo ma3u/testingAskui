@@ -36,7 +36,8 @@
   - [Examples](#examples)
     - [1. Game: Tic Tac Toe](#1-game-tic-tac-toe-1)
     - [2. Water Tank System Simulation](#2-water-tank-system-simulation-1)
-  - [Use Case: Automated OWASP Top 10 Security Checks for Web Applications](#use-case-automated-owasp-top-10-security-checks-for-web-applications)
+  - [Our Idea for a Use Case](#our-idea-for-a-use-case)
+    - [Automated OWASP Top 10 Security Checks for Web Applications](#automated-owasp-top-10-security-checks-for-web-applications)
     - [Process Overview](#process-overview)
     - [Why Use AskUI for Security Checks?](#why-use-askui-for-security-checks)
     - [How the Script Works](#how-the-script-works)
@@ -353,9 +354,11 @@ If there is a pop up, simulate closing it.
     assert is_equal, "The slider is not at the correct level"
 ```
 
-## Use Case: Automated OWASP Top 10 Security Checks for Web Applications
+## Our Idea for a Use Case
 
-This project demonstrates how to use AskUI for automated UI-driven security checks on a web application, specifically targeting the [OWASP Top 10 Web Application Security Risks](https://owasp.org/www-project-top-ten/). The included script, `askui-owasp-check.ts`, automates browser actions to:
+### Automated OWASP Top 10 Security Checks for Web Applications
+
+Our project idea demonstrates how to use AskUI for automated UI-driven security checks on a web application, specifically targeting the [OWASP Top 10 Web Application Security Risks](https://owasp.org/www-project-top-ten/). The included script, `askui-owasp-check.ts`, automates browser actions to:
 
 ---
 
@@ -363,22 +366,39 @@ This project demonstrates how to use AskUI for automated UI-driven security chec
 
 ```mermaid
 flowchart TD
-    S(["🚦 Start<br/>Initialize script"]) --> O(["🌐 Open Site<br/>Navigate to target URL"])
-    O --> W(["⏳ Wait<br/>Page fully loads"])
-    W --> I(["🔍 Find Inputs<br/>Detect all textboxes"])
-    I --> X(["🛡️ XSS Test<br/>Inject & submit XSS payload"])
-    X --> Q(["🛡️ SQLi Test<br/>Inject & submit SQLi payload"])
-    Q --> E(["⚠️ Check Errors<br/>Look for error/debug messages"])
-    E --> A{"🔑 Admin Link?<br/>Detect admin/login/logout"}
-    A -- Yes --> T(["🔐 Admin Test<br/>Try to access admin area"])
+    S(["1. 🚦 Start<br/>Initialize script"]) --> O(["2. 🌐 Open Site<br/>Navigate to target URL"])
+    O --> W(["3. ⏳ Wait<br/>Page fully loads"])
+    W --> I(["4. 🔍 Find Inputs<br/>Detect all textboxes"])
+    I --> X(["5. 🛡️ XSS Test<br/>Inject & submit XSS payload"])
+    X --> Q(["6. 🛡️ SQLi Test<br/>Inject & submit SQLi payload"])
+    Q --> E(["7. ⚠️ Check Errors<br/>Look for error/debug messages"])
+    E --> A{"8. 🔑 Admin Link?<br/>Detect admin/login/logout"}
+    A -- Yes --> T(["9. 🔐 Admin Test<br/>Try to access admin area"])
     A -- No --> K(["➡️ Skip Admin Test"])
-    T --> D(["🕵️ Debug Info<br/>Scan for sensitive data"])
+    T --> D(["10. 🕵️ Debug Info<br/>Scan for sensitive data"])
     K --> D
-    D --> L(["📝 Log Results<br/>Record findings"])
-    L --> F(["🏁 End<br/>Summary output"])
+    D --> L(["11. 📝 Log Results<br/>Record findings"])
+    L --> F(["12. 🏁 End<br/>Summary output"])
 ```
 
-This diagram uses only icons and text for clarity, with no color styling, for maximum compatibility and readability.
+This diagram is now numbered to match the Python script steps. See the step-by-step explanation below for details.
+
+---
+
+### Numbered Step-by-Step Explanation
+
+1. **Start**: Initialize the AskUI Vision Agent script.
+2. **Open Site**: Launch the target website (e.g., https://mabu.red/).
+3. **Wait**: Wait for the page to fully load.
+4. **Find Inputs**: Locate all visible textboxes or input fields.
+5. **XSS Test**: Inject and submit a common XSS payload into each input.
+6. **SQLi Test**: Inject and submit a common SQL injection payload into each input.
+7. **Check Errors**: Scan the UI for error messages or debug traces.
+8. **Admin Link?**: Detect presence of admin, login, or logout links.
+9. **Admin Test**: If present, attempt to access the admin area and check for access or errors.
+10. **Debug Info**: Scan for sensitive debug information (if applicable).
+11. **Log Results**: Record and print all findings.
+12. **End**: Output summary and finish.
 
 ---
 
@@ -415,3 +435,44 @@ python3 -m venv venv
 source venv/bin/activate
 pip install askui
 ```
+
+## How to Run the OWASP Test Script (Python)
+
+To start the automated OWASP Top 10 security test with AskUI Vision Agent in Python:
+
+1. **Install AskUI Agent OS**
+   - Download and install the AskUI Agent OS for your platform. See [vision-agent GitHub](https://github.com/askui/vision-agent) for links and instructions.
+
+2. **Install Python dependencies**
+   ```bash
+   pip install askui
+   ```
+   - Requires Python >= 3.10
+
+3. **Set up environment variables**
+   - You need to set at least:
+     - `ASKUI_WORKSPACE_ID`
+     - `ASKUI_TOKEN`
+     - `ANTHROPIC_API_KEY` (or compatible model key)
+   - Example (Linux/macOS):
+     ```bash
+     export ASKUI_WORKSPACE_ID=your-workspace-id
+     export ASKUI_TOKEN=your-token
+     export ANTHROPIC_API_KEY=your-anthropic-key
+     ```
+   - You can also use a `.env` file.
+
+4. **Start AskUI Agent OS**
+   - Make sure the AskUI Agent OS application is running before executing the script.
+
+5. **Run the OWASP test script**
+   ```bash
+   python askui_owasp_check.py
+   ```
+
+6. **Troubleshooting**
+   - Ensure all environment variables are set.
+   - The AskUI Agent OS must be running.
+   - If you have issues, consult the [AskUI Vision Agent documentation](https://github.com/askui/vision-agent).
+
+The script will open a browser, perform security checks, and log the results to your console.
