@@ -1,15 +1,8 @@
 
 # Automation Advocates Workshop: Intelligent UI Automation with AskUI
 
-Welcome to the Automation Advocates hands-on workshop! In this session, you'll embark on a journey from the basics of UI automation to advanced, AI-driven use cases with AskUI. Whether you're just starting out or looking to push the boundaries of automation, this workshop will equip you with the knowledge and practical skills to automate smarter.
-
-Join us as we:
-- Explore the evolution from traditional RPA to intelligent, vision-based automation
-- Learn the fundamentals of AskUI and its open-source ecosystem
-- Build real-world automation scripts together
-- Dive into advanced use cases, including security testing and agent-based automation
-
-For event details, visit the [Automation Advocates Meetup page](https://www.meetup.com/de-DE/automation-advocates/events/307565278/).
+| [![GitHub Repo QR](github-repo-qr.png)](https://github.com/ma3u/askui-automation-workshop) | **Welcome to the Automation Advocates hands-on workshop!**<br><br>In this session, you'll embark on a journey from the basics of UI automation to advanced, AI-driven use cases with AskUI.<br><br>Whether you're just starting out or looking to push the boundaries of automation, this workshop will equip you with the knowledge and practical skills to automate smarter.<br><br>**Scan to visit the GitHub repository:**<br>[https://github.com/ma3u/askui-automation-workshop](https://github.com/ma3u/askui-automation-workshop)<br><br>Join us as we:<ul><li>Explore the evolution from traditional RPA to intelligent, vision-based automation</li><li>Learn the fundamentals of AskUI and its open-source ecosystem</li><li>Build real-world automation scripts together</li><li>Dive into advanced use cases, including security testing and agent-based automation</li></ul>For event details, visit the <a href="https://www.meetup.com/de-DE/automation-advocates/events/307565278/">Automation Advocates Meetup page</a>. |
+|:---:|:---|
 
 ---
 
