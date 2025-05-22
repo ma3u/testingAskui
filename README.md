@@ -8,18 +8,39 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Repository](#repository)
-- [What is AskUI?](#what-is-askui)
-- [Why Intelligent UI Automation?](#why-intelligent-ui-automation)
-- [Getting Started with AskUI](#getting-started-with-askui)
-- [How to Use This Repository](#how-to-use-this-repository)
-- [Workshop Examples](#workshop-examples)
-- [Our Idea: Web Security Testing](#our-idea-web-security-testing)
-- [Team & Community](#team--community)
-- [Resources](#resources)
-- [RPA 2.0 (Robotics Process Automation)](#rpa-20-robotics-process-automation)
-- [AI Computer Agent Comparison Matrix](#ai-computer-agent-comparison-matrix)
+- [Automation Advocates Workshop: Intelligent UI Automation with AskUI](#automation-advocates-workshop-intelligent-ui-automation-with-askui)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+    - [Repository](#repository)
+  - [What is AskUI?](#what-is-askui)
+  - [Why Intelligent UI Automation?](#why-intelligent-ui-automation)
+  - [Getting Started with AskUI](#getting-started-with-askui)
+  - [How to Use This Repository](#how-to-use-this-repository)
+    - [1. Clone the Repo](#1-clone-the-repo)
+    - [2. Set Up Your Environment](#2-set-up-your-environment)
+    - [3. Run Example Tests](#3-run-example-tests)
+    - [4. Customize or Add Your Own](#4-customize-or-add-your-own)
+  - [Workshop Examples](#workshop-examples)
+    - [1. Game: Tic Tac Toe](#1-game-tic-tac-toe)
+    - [2. Water Tank System Simulation](#2-water-tank-system-simulation)
+  - [Our Idea: Web Security Testing](#our-idea-web-security-testing)
+    - [How to Run `askui-owasp-check.ts`](#how-to-run-askui-owasp-checkts)
+  - [Team \& Community](#team--community)
+  - [Resources](#resources)
+  - [RPA 2.0 (Robotics Process Automation)](#rpa-20-robotics-process-automation)
+  - [AI Computer Agent Comparison Matrix](#ai-computer-agent-comparison-matrix)
+  - [AI Agent - Different Levels of Agencies](#ai-agent---different-levels-of-agencies)
+  - [Model List](#model-list)
+  - [| AskUI PTA-1         |                                                                                             |                              |](#-askui-pta-1------------------------------------------------------------------------------------------------------------------------------------)
+  - [UI Models](#ui-models)
+  - [Examples](#examples)
+    - [1. Game: Tic Tac Toe](#1-game-tic-tac-toe-1)
+    - [2. Water Tank System Simulation](#2-water-tank-system-simulation-1)
+  - [Use Case: Automated OWASP Top 10 Security Checks for Web Applications](#use-case-automated-owasp-top-10-security-checks-for-web-applications)
+    - [Process Overview](#process-overview)
+    - [Why Use AskUI for Security Checks?](#why-use-askui-for-security-checks)
+    - [How the Script Works](#how-the-script-works)
+  - [Installation](#installation)
 
 ---
 
@@ -112,7 +133,26 @@ Control and monitor a simulated water tank system, demonstrating AskUI's ability
 
 See how AskUI can be used to automate UI-driven security checks, such as the [OWASP Top 10 Web Application Security Risks](https://owasp.org/www-project-top-ten/).
 
-The included script, [`askui-owasp-check.ts`](./askui-owasp-check.ts), demonstrates automated payload injection, error detection, and access control checks.
+The included script, [`askui-owasp-check.ts`](./askui-owasp-check.ts) ([View on GitHub](https://github.com/ma3u/askui-automation-workshop/blob/main/askui-owasp-check.ts)), demonstrates automated payload injection, error detection, and access control checks.
+
+```mermaid
+flowchart TD
+    Start([Start]) --> OpenSite([Open Website])
+    OpenSite --> Wait([Wait for Load])
+    Wait --> FindInputs([Find Inputs])
+    FindInputs --> XSS([Inject XSS Payload])
+    XSS --> SQLi([Inject SQLi Payload])
+    SQLi --> Errors([Check for Errors])
+    Errors --> AdminCheck{Admin Link?}
+    AdminCheck -- Yes --> Admin([Admin Access Check])
+    AdminCheck -- No --> Skip([Skip Admin Check])
+    Admin --> Debug([Scan Debug Info])
+    Skip --> Debug
+    Debug --> Results([Log Results])
+    Results --> End([End])
+```
+
+This compact, top-down diagram is optimized for web and presentations, making the AskUI security workflow easy to follow at a glance.
 
 ### How to Run `askui-owasp-check.ts`
 
@@ -319,19 +359,26 @@ This project demonstrates how to use AskUI for automated UI-driven security chec
 
 ---
 
-### Process Overview (Mermaid Diagram)
+### Process Overview
 
 ```mermaid
-flowchart LR
-    A([Start Script]) --> B([Open Website]) --> C([Wait for Load]) --> D([Find Inputs])
-    D --> E([Inject XSS]) --> F([Inject SQLi]) --> G([Check Errors])
-    G --> H([Login/Logout/Admin?]) --> I{Admin Link?}
-    I -- Yes --> J([Click Admin & Check])
-    I -- No --> K([Skip Admin Check])
-    J --> L([Scan Debug Info])
-    K --> L
-    L --> M([Log Results]) --> N([End Script])
+flowchart TD
+    S(["🚦 Start<br/>Initialize script"]) --> O(["🌐 Open Site<br/>Navigate to target URL"])
+    O --> W(["⏳ Wait<br/>Page fully loads"])
+    W --> I(["🔍 Find Inputs<br/>Detect all textboxes"])
+    I --> X(["🛡️ XSS Test<br/>Inject & submit XSS payload"])
+    X --> Q(["🛡️ SQLi Test<br/>Inject & submit SQLi payload"])
+    Q --> E(["⚠️ Check Errors<br/>Look for error/debug messages"])
+    E --> A{"🔑 Admin Link?<br/>Detect admin/login/logout"}
+    A -- Yes --> T(["🔐 Admin Test<br/>Try to access admin area"])
+    A -- No --> K(["➡️ Skip Admin Test"])
+    T --> D(["🕵️ Debug Info<br/>Scan for sensitive data"])
+    K --> D
+    D --> L(["📝 Log Results<br/>Record findings"])
+    L --> F(["🏁 End<br/>Summary output"])
 ```
+
+This diagram uses only icons and text for clarity, with no color styling, for maximum compatibility and readability.
 
 ---
 
@@ -350,7 +397,7 @@ AskUI is a visual automation tool that interacts with web applications as a user
 While AskUI cannot replace dedicated security scanners, it is useful for continuous integration pipelines and basic regression security checks.
 
 ### How the Script Works
-The `askui-owasp-check.ts` script performs the following steps:
+The [`askui-owasp-check.ts`](https://github.com/ma3u/askui-automation-workshop/blob/main/askui-owasp-check.ts) script performs the following steps:
 
 1. **Opens the target website** and waits for it to load.
 2. **Inputs XSS and SQLi payloads** into all detected textboxes and submits them, checking for any visible alerts or errors.
