@@ -364,49 +364,28 @@ Our project idea demonstrates how to use AskUI for automated UI-driven security 
 
 ### Process Overview
 
+
 ```mermaid
 flowchart TD
-    S(["1. 🚦 Start<br/>Initialize script"]) --> O(["2. 🌐 Open Site<br/>Navigate to target URL"])
-    O --> W(["3. ⏳ Wait<br/>Page fully loads"])
-    W --> I(["4. 🔍 Find Inputs<br/>Detect all textboxes"])
-    I --> X(["5. 🛡️ XSS Test<br/>Inject & submit XSS payload"])
-    X --> Q(["6. 🛡️ SQLi Test<br/>Inject & submit SQLi payload"])
-    Q --> E(["7. ⚠️ Check Errors<br/>Look for error/debug messages"])
-    E --> A{"8. 🔑 Admin Link?<br/>Detect admin/login/logout"}
-    A -- Yes --> T(["9. 🔐 Admin Test<br/>Try to access admin area"])
+    S(["🚦 Start<br/>Initialize script"]) --> O(["🌐 Open Site<br/>Navigate to target URL"])
+    O --> W(["⏳ Wait<br/>Page fully loads"])
+    W --> I(["🔍 Find Inputs<br/>Detect all textboxes"])
+    I --> X(["🛡️ XSS Test<br/>Inject & submit XSS payload"])
+    X --> Q(["🛡️ SQLi Test<br/>Inject & submit SQLi payload"])
+    Q --> E(["⚠️ Check Errors<br/>Look for error/debug messages"])
+    E --> A{"🔑 Admin Link?<br/>Detect admin/login/logout"}
+    A -- Yes --> T(["🔐 Admin Test<br/>Try to access admin area"])
     A -- No --> K(["➡️ Skip Admin Test"])
-    T --> D(["10. 🕵️ Debug Info<br/>Scan for sensitive data"])
+    T --> D(["🕵️ Debug Info<br/>Scan for sensitive data"])
     K --> D
-    D --> L(["11. 📝 Log Results<br/>Record findings"])
-    L --> F(["12. 🏁 End<br/>Summary output"])
+    D --> L(["📝 Log Results<br/>Record findings"])
+    L --> F(["🏁 End<br/>Summary output"])
 ```
 
-This diagram is now numbered to match the Python script steps. See the step-by-step explanation below for details.
-
----
-
-### Numbered Step-by-Step Explanation
-
-1. **Start**: Initialize the AskUI Vision Agent script.
-2. **Open Site**: Launch the target website (e.g., https://mabu.red/).
-3. **Wait**: Wait for the page to fully load.
-4. **Find Inputs**: Locate all visible textboxes or input fields.
-5. **XSS Test**: Inject and submit a common XSS payload into each input.
-6. **SQLi Test**: Inject and submit a common SQL injection payload into each input.
-7. **Check Errors**: Scan the UI for error messages or debug traces.
-8. **Admin Link?**: Detect presence of admin, login, or logout links.
 9. **Admin Test**: If present, attempt to access the admin area and check for access or errors.
 10. **Debug Info**: Scan for sensitive debug information (if applicable).
 11. **Log Results**: Record and print all findings.
 12. **End**: Output summary and finish.
-
----
-
-- Open a specified website (e.g., https://mabu.red/)
-- Attempt to inject common XSS and SQLi payloads in visible input fields
-- Look for error messages, debug traces, or misconfiguration indicators in the UI
-- Detect the presence of login/logout and admin links, and attempt to access restricted areas
-- Provide console output for any detected issues or confirmations
 
 ### Why Use AskUI for Security Checks?
 AskUI is a visual automation tool that interacts with web applications as a user would, making it possible to:
@@ -417,7 +396,7 @@ AskUI is a visual automation tool that interacts with web applications as a user
 While AskUI cannot replace dedicated security scanners, it is useful for continuous integration pipelines and basic regression security checks.
 
 ### How the Script Works
-The [`askui-owasp-check.ts`](https://github.com/ma3u/askui-automation-workshop/blob/main/askui-owasp-check.ts) script performs the following steps:
+The <a href="https://github.com/ma3u/askui-automation-workshop/blob/main/askui-owasp-check.ts" target="_blank">`askui-owasp-check.ts`</a> script performs the following steps:
 
 1. **Opens the target website** and waits for it to load.
 2. **Inputs XSS and SQLi payloads** into all detected textboxes and submits them, checking for any visible alerts or errors.
@@ -441,38 +420,29 @@ pip install askui
 To start the automated OWASP Top 10 security test with AskUI Vision Agent in Python:
 
 1. **Install AskUI Agent OS**
-   - Download and install the AskUI Agent OS for your platform. See [vision-agent GitHub](https://github.com/askui/vision-agent) for links and instructions.
+   - Download and install the AskUI Agent OS for your platform. See <a href="https://github.com/askui/vision-agent" target="_blank">vision-agent GitHub</a> for links and instructions.
 
 2. **Install Python dependencies**
-   ```bash
-   pip install askui
-   ```
-   - Requires Python >= 3.10
-
 3. **Set up environment variables**
-   - You need to set at least:
-     - `ASKUI_WORKSPACE_ID`
-     - `ASKUI_TOKEN`
-     - `ANTHROPIC_API_KEY` (or compatible model key)
-   - Example (Linux/macOS):
-     ```bash
-     export ASKUI_WORKSPACE_ID=your-workspace-id
-     export ASKUI_TOKEN=your-token
-     export ANTHROPIC_API_KEY=your-anthropic-key
-     ```
-   - You can also use a `.env` file.
-
+  - You need to set at least:
+    - `ASKUI_WORKSPACE_ID`
+    - `ASKUI_TOKEN`
+    - `ANTHROPIC_API_KEY` (or compatible model key)
+  - Example (Linux/macOS):
+```bash
+export ASKUI_WORKSPACE_ID=your-workspace-id
+export ASKUI_TOKEN=your-token
+export ANTHROPIC_API_KEY=your-anthropic-key
+```
+  - You can also use a `.env` file.
 4. **Start AskUI Agent OS**
-   - Make sure the AskUI Agent OS application is running before executing the script.
-
+  - Make sure the AskUI Agent OS application is running before executing the script.
 5. **Run the OWASP test script**
-   ```bash
-   python askui_owasp_check.py
-   ```
-
+```bash
+python askui_owasp_check.py
+```
 6. **Troubleshooting**
-   - Ensure all environment variables are set.
-   - The AskUI Agent OS must be running.
-   - If you have issues, consult the [AskUI Vision Agent documentation](https://github.com/askui/vision-agent).
-
+  - Ensure all environment variables are set.
+  - The AskUI Agent OS must be running.
+  - If you have issues, consult the <a href="https://github.com/askui/vision-agent" target="_blank">AskUI Vision Agent documentation</a>.
 The script will open a browser, perform security checks, and log the results to your console.
