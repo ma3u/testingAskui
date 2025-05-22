@@ -2,15 +2,38 @@
 askui_owasp_check.py - Automated OWASP Top 10 UI checks using AskUI Vision Agent (Python)
 
 Requirements:
-- askui (pip install askui)
+- askui (pip install askui)  # Use the latest version
+- python-dotenv (pip install python-dotenv)
 - AskUI Agent OS running
-- Environment variables: ASKUI_WORKSPACE_ID, ASKUI_TOKEN, ANTHROPIC_API_KEY (or compatible model)
+- Environment variables: ASKUI_WORKSPACE_ID, ASKUI_TOKEN, ANTHROPIC_API_KEY, ASKUI_INSTALLATION_DIRECTORY
 
 See https://github.com/askui/vision-agent for details
 """
 
-from askui import VisionAgent
+import os
+import sys
 import time
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("[AskUI OWASP Check] Optional: Install python-dotenv to load .env files automatically.")
+
+REQUIRED_ENV_VARS = [
+    "ASKUI_WORKSPACE_ID",
+    "ASKUI_TOKEN",
+    "ANTHROPIC_API_KEY",
+    "ASKUI_INSTALLATION_DIRECTORY"
+]
+missing = [var for var in REQUIRED_ENV_VARS if not os.environ.get(var)]
+if missing:
+    print("\n[ERROR] The following required environment variables are missing:\n")
+    for var in missing:
+        print(f"  - {var}")
+    print("\nPlease set them in your environment or in a .env file before running this script.\n")
+    sys.exit(1)
+
+from askui import VisionAgent
 
 # Payloads for security testing
 XSS_PAYLOAD = "<script>alert('xss')</script>"

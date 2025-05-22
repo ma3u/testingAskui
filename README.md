@@ -425,22 +425,51 @@ To start the automated OWASP Top 10 security test with AskUI Vision Agent in Pyt
 2. **Install Python dependencies**
 3. **Set up environment variables**
   - You need to set at least:
-    - `ASKUI_WORKSPACE_ID`
-    - `ASKUI_TOKEN`
-    - `ANTHROPIC_API_KEY` (or compatible model key)
-  - Example (Linux/macOS):
+    - `ASKUI_WORKSPACE_ID` (**required**)
+    - `ASKUI_TOKEN` (**required**)
+    - `ASKUI_INSTALLATION_DIRECTORY` (**required**, path to AskUI Agent OS)
+    - `ANTHROPIC_API_KEY` (**optional**, only needed for LLM-based features)
+
+**How to get your AskUI credentials:**
+- **ASKUI_WORKSPACE_ID** and **ASKUI_TOKEN**:
+  1. Log in to your [AskUI Web App](https://app.askui.com/) or dashboard.
+  2. Go to your Workspace settings.
+  3. Copy the Workspace ID (`ASKUI_WORKSPACE_ID`).
+  4. Create or view an API Token for your workspace and copy it as `ASKUI_TOKEN`.
+  5. Paste both values into your `.env` file or export them in your shell.
+- **ANTHROPIC_API_KEY**:
+  - Only needed if you want to use LLM-based features (e.g., AI-powered assertions or explanations).
+  - You can leave this blank if not required.
+
+#### Using a `.env` file (Recommended)
+1. Copy the example file:
+   ```bash
+   cp .env.example .env
+   ```
+2. Open `.env` and fill in your real credentials and installation directory.
+
+> **Tip:** The `.env.example` file contains inline comments explaining how to obtain each required variable. Refer to it if you are unsure where to find your AskUI Workspace ID, Token, or other values.
+
+#### Or set variables in your shell (Linux/macOS):
 ```bash
 export ASKUI_WORKSPACE_ID=your-workspace-id
 export ASKUI_TOKEN=your-token
-export ANTHROPIC_API_KEY=your-anthropic-key
+export ASKUI_INSTALLATION_DIRECTORY="/Applications/AskUI Agent"  # Adjust for your OS
+# export ANTHROPIC_API_KEY=your-anthropic-api-key  # Optional
 ```
-  - You can also use a `.env` file.
+
+> **Note:** The script will not run without the required variables set.
+
 4. **Start AskUI Agent OS**
   - Make sure the AskUI Agent OS application is running before executing the script.
-5. **Run the OWASP test script**
+
+#### How to Run
+Make sure your environment variables are set (see above), then run:
+
 ```bash
 python askui_owasp_check.py
 ```
+
 6. **Troubleshooting**
   - Ensure all environment variables are set.
   - The AskUI Agent OS must be running.
