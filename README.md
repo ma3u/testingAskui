@@ -9,19 +9,31 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Repository](#repository)
 - [What is AskUI?](#what-is-askui)
 - [Why Intelligent UI Automation?](#why-intelligent-ui-automation)
 - [Getting Started with AskUI](#getting-started-with-askui)
+- [How to Use This Repository](#how-to-use-this-repository)
 - [Workshop Examples](#workshop-examples)
-- [Advanced Use Case: Security Testing](#advanced-use-case-security-testing)
+- [Our Idea: Web Security Testing](#our-idea-web-security-testing)
 - [Team & Community](#team--community)
 - [Resources](#resources)
+- [RPA 2.0 (Robotics Process Automation)](#rpa-20-robotics-process-automation)
+- [AI Computer Agent Comparison Matrix](#ai-computer-agent-comparison-matrix)
 
 ---
 
 ## Introduction
 
 Automation is evolving. Traditional rule-based bots are giving way to intelligent, adaptive agents that can understand and interact with software just like humans do. In this workshop, we'll see how AskUI is leading this transformation with its vision-driven, AI-powered approach to UI automation.
+
+---
+
+### Repository
+
+This workshop's code is available at: [https://github.com/ma3u/askui-automation-workshop](https://github.com/ma3u/askui-automation-workshop)
+
+---
 
 ## What is AskUI?
 
@@ -51,6 +63,43 @@ pip install askui
 
 See the [AskUI documentation](https://docs.askui.com/introduction/01-introduction/01-overview) for detailed setup instructions.
 
+---
+
+## How to Use This Repository
+
+### 1. Clone the Repo
+
+```bash
+git clone https://github.com/ma3u/askui-automation-workshop.git
+cd askui-automation-workshop
+```
+
+### 2. Set Up Your Environment
+
+- Create and activate a virtual environment (see above)
+- Install dependencies:
+
+```bash
+pip install askui
+```
+
+### 3. Run Example Tests
+
+You can run the provided agent automation tests using:
+
+```bash
+python run_agent_tests.py
+```
+
+This will run all sample scenarios, including Tic Tac Toe automation (see `test_my_test.py`).
+
+### 4. Customize or Add Your Own
+
+- Edit or add test files (e.g., `test_my_test.py`) to create new automation scenarios.
+- Use `run_agent_tests.py` as an entry point for running your tests.
+
+---
+
 ## Workshop Examples
 
 ### 1. Game: Tic Tac Toe
@@ -61,7 +110,34 @@ Control and monitor a simulated water tank system, demonstrating AskUI's ability
 
 ## Our Idea: Web Security Testing
 
-See how AskUI can be used to automate UI-driven security checks, such as the [OWASP Top 10 Web Application Security Risks](https://owasp.org/www-project-top-ten/). The included script, `askui-owasp-check.ts`, demonstrates automated payload injection, error detection, and access control checks.
+See how AskUI can be used to automate UI-driven security checks, such as the [OWASP Top 10 Web Application Security Risks](https://owasp.org/www-project-top-ten/).
+
+The included script, [`askui-owasp-check.ts`](./askui-owasp-check.ts), demonstrates automated payload injection, error detection, and access control checks.
+
+### How to Run `askui-owasp-check.ts`
+
+1. Make sure you have [Node.js](https://nodejs.org/) and the AskUI CLI installed.
+2. Install AskUI dependencies in your project:
+
+   ```bash
+   npm install askui
+   # or
+   yarn add askui
+   ```
+
+3. Run the script with Node.js:
+
+   ```bash
+   node askui-owasp-check.ts
+   ```
+
+   Or, if using TypeScript directly:
+
+   ```bash
+   npx ts-node askui-owasp-check.ts
+   ```
+
+4. Ensure your AskUI environment (API keys, agent, etc.) is configured as described in the [AskUI documentation](https://docs.askui.com/introduction/01-introduction/01-overview).
 
 ```mermaid
 flowchart LR
