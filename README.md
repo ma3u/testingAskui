@@ -24,7 +24,7 @@
     - [1. Game: Tic Tac Toe](#1-game-tic-tac-toe)
     - [2. Water Tank System Simulation](#2-water-tank-system-simulation)
   - [Our Idea: Web Security Testing](#our-idea-web-security-testing)
-    - [How to Run `askui_owasp_check.py`](#how-to-run-askui-owasp-checkts)
+    - [How to Run `askui_owasp_check.py`](#how-to-run-askui_owasp_checkpy)
   - [Team \& Community](#team--community)
   - [Resources](#resources)
   - [RPA 2.0 (Robotics Process Automation)](#rpa-20-robotics-process-automation)
@@ -42,6 +42,10 @@
     - [Why Use AskUI for Security Checks?](#why-use-askui-for-security-checks)
     - [How the Script Works](#how-the-script-works)
   - [Installation](#installation)
+  - [How to Run the OWASP Test Script (Python)](#how-to-run-the-owasp-test-script-python)
+      - [Using a `.env` file (Recommended)](#using-a-env-file-recommended)
+      - [Or set variables in your shell (Linux/macOS):](#or-set-variables-in-your-shell-linuxmacos)
+      - [How to Run](#how-to-run)
 
 ---
 
