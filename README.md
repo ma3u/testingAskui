@@ -24,7 +24,7 @@
     - [1. Game: Tic Tac Toe](#1-game-tic-tac-toe)
     - [2. Water Tank System Simulation](#2-water-tank-system-simulation)
   - [Our Idea: Web Security Testing](#our-idea-web-security-testing)
-    - [How to Run `askui-owasp-check.ts`](#how-to-run-askui-owasp-checkts)
+    - [How to Run `askui_owasp_check.py`](#how-to-run-askui-owasp-checkts)
   - [Team \& Community](#team--community)
   - [Resources](#resources)
   - [RPA 2.0 (Robotics Process Automation)](#rpa-20-robotics-process-automation)
@@ -134,28 +134,23 @@ Control and monitor a simulated water tank system, demonstrating AskUI's ability
 
 See how AskUI can be used to automate UI-driven security checks, such as the [OWASP Top 10 Web Application Security Risks](https://owasp.org/www-project-top-ten/).
 
-The included script, [`askui-owasp-check.ts`](./askui-owasp-check.ts) ([View on GitHub](https://github.com/ma3u/askui-automation-workshop/blob/main/askui-owasp-check.ts)), demonstrates automated payload injection, error detection, and access control checks.
+The included script, [`askui_owasp_check.py`](./askui_owasp_check.py) ([View on GitHub](https://github.com/ma3u/askui-automation-workshop/blob/main/askui_owasp_check.py)), demonstrates automated payload injection, error detection, and access control checks.
 
 ```mermaid
 flowchart TD
-    Start([Start]) --> OpenSite([Open Website])
-    OpenSite --> Wait([Wait for Load])
-    Wait --> FindInputs([Find Inputs])
-    FindInputs --> XSS([Inject XSS Payload])
-    XSS --> SQLi([Inject SQLi Payload])
-    SQLi --> Errors([Check for Errors])
+    Start([Start Script]) --> OpenSite([Open Website]) --> Wait([Wait for Load]) --> FindInputs([Find Inputs])
+    FindInputs --> XSS([Inject XSS Payload]) --> SQLi([Inject SQLi Payload]) --> Errors([Check for Errors])
     Errors --> AdminCheck{Admin Link?}
     AdminCheck -- Yes --> Admin([Admin Access Check])
     AdminCheck -- No --> Skip([Skip Admin Check])
     Admin --> Debug([Scan Debug Info])
     Skip --> Debug
-    Debug --> Results([Log Results])
-    Results --> End([End])
+    Debug --> Results([Log Results]) --> End([End Script])
 ```
 
 This compact, top-down diagram is optimized for web and presentations, making the AskUI security workflow easy to follow at a glance.
 
-### How to Run `askui-owasp-check.ts`
+### How to Run `askui_owasp_check.py`
 
 1. Make sure you have [Node.js](https://nodejs.org/) and the AskUI CLI installed.
 2. Install AskUI dependencies in your project:
@@ -169,28 +164,18 @@ This compact, top-down diagram is optimized for web and presentations, making th
 3. Run the script with Node.js:
 
    ```bash
-   node askui-owasp-check.ts
+   node askui_owasp_check.py
    ```
 
-   Or, if using TypeScript directly:
+   Or, if using Python directly:
 
    ```bash
-   npx ts-node askui-owasp-check.ts
+   npx  askui_owasp_check.py
    ```
 
 4. Ensure your AskUI environment (API keys, agent, etc.) is configured as described in the [AskUI documentation](https://docs.askui.com/introduction/01-introduction/01-overview).
 
-```mermaid
-flowchart LR
-    A([Start Script]) --> B([Open Website]) --> C([Wait for Load]) --> D([Find Inputs])
-    D --> E([Inject XSS]) --> F([Inject SQLi]) --> G([Check Errors])
-    G --> H([Login/Logout/Admin?]) --> I{Admin Link?}
-    I -- Yes --> J([Click Admin & Check])
-    I -- No --> K([Skip Admin Check])
-    J --> L([Scan Debug Info])
-    K --> L
-    L --> M([Log Results]) --> N([End Script])
-```
+
 
 ## Team & Community
 
@@ -227,7 +212,7 @@ RPA 2.0 represents a paradigm shift from rule-based to intelligence-driven autom
 | Intent-based Prompting | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Single-step Commands | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
 | Human-in-the-Loop | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Prompting Interface | Python, TypeScript | Chat | Chat | Python | Custom | Python | Chrome Extension |
+| Prompting Interface | Python, Python | Chat | Chat | Python | Custom | Python | Chrome Extension |
 | Enterprise Installer | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | On-Premise Availability | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ |
 | Model Control Protocol | ❌soon | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
@@ -358,7 +343,7 @@ If there is a pop up, simulate closing it.
 
 ### Automated OWASP Top 10 Security Checks for Web Applications
 
-Our project idea demonstrates how to use AskUI for automated UI-driven security checks on a web application, specifically targeting the [OWASP Top 10 Web Application Security Risks](https://owasp.org/www-project-top-ten/). The included script, `askui-owasp-check.ts`, automates browser actions to:
+Our project idea demonstrates how to use AskUI for automated UI-driven security checks on a web application, specifically targeting the [OWASP Top 10 Web Application Security Risks](https://owasp.org/www-project-top-ten/). The included script, `askui_owasp_check.py`, automates browser actions to:
 
 ---
 
@@ -396,7 +381,7 @@ AskUI is a visual automation tool that interacts with web applications as a user
 While AskUI cannot replace dedicated security scanners, it is useful for continuous integration pipelines and basic regression security checks.
 
 ### How the Script Works
-The <a href="https://github.com/ma3u/askui-automation-workshop/blob/main/askui-owasp-check.ts" target="_blank">`askui-owasp-check.ts`</a> script performs the following steps:
+The <a href="https://github.com/ma3u/askui-automation-workshop/blob/main/askui_owasp_check.py" target="_blank">`askui_owasp_check.py`</a> script performs the following steps:
 
 1. **Opens the target website** and waits for it to load.
 2. **Inputs XSS and SQLi payloads** into all detected textboxes and submits them, checking for any visible alerts or errors.

@@ -22,9 +22,9 @@ except ImportError:
 REQUIRED_ENV_VARS = [
     "ASKUI_WORKSPACE_ID",
     "ASKUI_TOKEN",
-    "ANTHROPIC_API_KEY",
     "ASKUI_INSTALLATION_DIRECTORY"
 ]
+OPTIONAL_ENV_VARS = ["ANTHROPIC_API_KEY"]
 missing = [var for var in REQUIRED_ENV_VARS if not os.environ.get(var)]
 if missing:
     print("\n[ERROR] The following required environment variables are missing:\n")
@@ -32,6 +32,11 @@ if missing:
         print(f"  - {var}")
     print("\nPlease set them in your environment or in a .env file before running this script.\n")
     sys.exit(1)
+else:
+    # Warn if optional variables are missing, but do not error
+    for var in OPTIONAL_ENV_VARS:
+        if not os.environ.get(var):
+            print(f"[WARNING] Optional environment variable {var} is not set. LLM-based features will be disabled.")
 
 from askui import VisionAgent
 
